@@ -1,0 +1,49 @@
+﻿@using Lab3.Models
+@model Product
+
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Chi tiết sản phẩm</h3>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="@Model.Image" alt="@Model.Name" class="img-fluid" style="max-height: 300px; width: auto;">
+                    </div>
+
+                    <hr />
+
+                    <h4>@Model.Name</h4>
+
+                    <p><strong>Giá gốc:</strong> @Model.Price.ToString("N0")</p>
+                    <p><strong>Giá mới:</strong> @Model.SalePrice.ToString("N0")</p>
+
+                    <h5>Mô Tả:</h5>
+                    <p>@Model.Description</p>
+
+                    <p>
+                        <strong>Trạng thái:</strong>
+                        @if (Model.Status == 1)
+                        {
+                            <span class="badge bg-success">Còn hàng</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Hết hàng</span>
+                        }
+                    </p>
+
+                    <p><strong>Ngày đăng:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</p>
+
+                    <a asp-route="product_index" class="btn btn-secondary">Về danh sách</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
