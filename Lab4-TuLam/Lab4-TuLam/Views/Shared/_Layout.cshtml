@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lab4-TuLam - @ViewBag.Title</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Lab4-TuLam</a>
+            <ul class="nav navbar-nav">
+                <li class="active"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li><a asp-controller="Home" asp-action="About">Giới thiệu</a></li>
+                <li><a asp-controller="Home" asp-action="Contact">Liên hệ</a></li>
+                <li><a asp-controller="Book" asp-action="Index">Sản phẩm</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="container" style="margin-top: 20px; min-height: 500px;">
+        <div class="row">
+            
+            <div class="col-md-3">
+                <partial name="CategoryPartial" />
+            </div>
+
+            
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="navbar navbar-inverse" style="border-radius: 0; margin-bottom: 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>GIỚI THIỆU</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Debitis ab suscipit deserunt mollitia recusandae, nobis iure aliquam velit et laboriosam ducimus veritatis corporis est, dolores aperiam! Officiis impedit provident laboriosam.</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h4>LIÊN HỆ</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Odit amet suscipit quasi quibusdam impedit magni molestias. Dolores, aliquid commodi ut esse eos voluptatem nisi facilis dolorem, repudiandae culpa ea quidem.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
