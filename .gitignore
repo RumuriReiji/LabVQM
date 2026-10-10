@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HEAD
 [Bb]in/
 [Oo]bj/
@@ -43,3 +44,6 @@ Thumbs.db
 # Logs
 *.log
 404717e985de714986d44c0607a6dba0c675f16c
+=======
+﻿# Visual Studio`n.vs/`n# Build`nbin/`nobj/`n# User-specific`n*.user`n*.suo`n*.userosscache`n*.sln.docstates`n# NuGet`n*.nupkg`n# Node`nnode_modules/`n# Logs`n*.log`n# Database`n*.db`n# publish`npublish/
+>>>>>>> 6b2a7a9 (Add .gitignore)
