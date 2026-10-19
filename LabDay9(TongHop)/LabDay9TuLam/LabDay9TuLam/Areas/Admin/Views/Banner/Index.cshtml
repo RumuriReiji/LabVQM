@@ -1,0 +1,108 @@
+@model IEnumerable<LabDay9TuLam.Models.Banner>
+
+@{
+    ViewData["Title"] = "Danh sách Banner";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Quản lý Banner</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh sách Banner</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách Banner</h3>
+                <div class="card-tools">
+                    <a asp-action="Create" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus mr-1"></i> Thêm mới
+                    </a>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-bordered table-striped table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>Tên</th>
+                            <th>Trạng thái</th>
+                            <th>Độ ưu tiên</th>
+                            <th>Hình ảnh</th>
+                            <th>Mô tả</th>
+                            <th style="width: 150px;" class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            int index = 1;
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@index</td>
+                                    <td><strong>@item.Name</strong></td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="badge badge-success">Hoạt động</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Không hoạt động</span>
+                                        }
+                                    </td>
+                                    <td>@item.Prioty</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.Image))
+                                        {
+                                            <img src="@item.Image" alt="@item.Name" class="img-thumbnail" style="max-height: 50px; max-width: 100px; object-fit: cover;" onerror="this.onerror=null;this.style.display='none';" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Chưa có ảnh</span>
+                                        }
+                                    </td>
+                                    <td style="max-width: 300px; white-space: normal;">@item.Description</td>
+                                    <td class="text-center">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">Không có dữ liệu banner nào.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</section>
+<!-- /.content -->

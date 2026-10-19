@@ -1,0 +1,95 @@
+@model LabDay9TuLam.Models.Banner
+
+@{
+    ViewData["Title"] = "Xóa Banner";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Xóa Banner</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Banner" asp-action="Index">Quản lý Banner</a></li>
+                    <li class="breadcrumb-item active">Xóa</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-danger">
+            <div class="card-header">
+                <h3 class="card-title">Bạn có chắc chắn muốn xóa banner này không?</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <dl class="row">
+                    <dt class="col-sm-3">Mã Banner (#)</dt>
+                    <dd class="col-sm-9">@Model.Id</dd>
+
+                    <dt class="col-sm-3">Tên Banner</dt>
+                    <dd class="col-sm-9"><strong>@Model.Name</strong></dd>
+
+                    <dt class="col-sm-3">Trạng thái</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.Status == 1)
+                        {
+                            <span class="badge badge-success">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-danger">Không hoạt động</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Độ ưu tiên</dt>
+                    <dd class="col-sm-9">@Model.Prioty</dd>
+
+                    <dt class="col-sm-3">Hình ảnh</dt>
+                    <dd class="col-sm-9">
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <div class="mb-2">
+                                <img src="@Model.Image" alt="@Model.Name" class="img-thumbnail" style="max-height: 120px; max-width: 250px; object-fit: cover;" onerror="this.onerror=null;this.style.display='none';" />
+                            </div>
+                            <span class="text-muted small">@Model.Image</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Chưa có ảnh</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Mô tả</dt>
+                    <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Description) ? "Không có mô tả" : Model.Description)</dd>
+                </dl>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash mr-1"></i> Xác nhận xóa
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left mr-1"></i> Quay lại
+                    </a>
+                </form>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</section>
+<!-- /.content -->

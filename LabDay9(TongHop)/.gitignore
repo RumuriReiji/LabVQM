@@ -1,0 +1,6 @@
+# Bỏ qua các file build và cấu hình của Visual Studio
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo

@@ -1,0 +1,140 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <!-- Trang chính -->
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>Trang chính</p>
+            </a>
+        </li>
+
+        <!-- Danh mục -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-folder"></i>
+                <p>
+                    Danh mục
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách danh mục</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Create" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm danh mục</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Sản phẩm -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>
+                    Sản phẩm
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách sản phẩm</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Product" asp-action="Create" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm sản phẩm</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- BLogs -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-file-alt"></i>
+                <p>
+                    BLogs
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Blog" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách bài viết</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Blog" asp-action="Create" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm bài viết</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Banner -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon far fa-image"></i>
+                <p>
+                    Banner
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Banner" asp-action="Index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách banner</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="Admin" asp-controller="Banner" asp-action="Create" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm banner</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Khách hàng -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Khách hàng</p>
+            </a>
+        </li>
+
+        <!-- Đơn hàng -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-shopping-bag"></i>
+                <p>
+                    Đơn hàng
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách đơn hàng</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>

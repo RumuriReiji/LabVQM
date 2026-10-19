@@ -1,0 +1,102 @@
+@model LabDay9TuLam.Models.Blog
+
+@{
+    ViewData["Title"] = "Xóa bài viết";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Xóa bài viết</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Blog" asp-action="Index">Bài viết</a></li>
+                    <li class="breadcrumb-item active">Xóa bài viết</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Xác nhận xóa bài viết</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Cảnh báo!</h5>
+                            Bạn có chắc chắn muốn xóa bài viết này không? Hành động này không thể hoàn tác.
+                        </div>
+
+                        <dl class="row">
+                            <dt class="col-sm-3">Mã bài viết (ID):</dt>
+                            <dd class="col-sm-9">@Model.Id</dd>
+
+                            <dt class="col-sm-3">Tên bài viết:</dt>
+                            <dd class="col-sm-9 font-weight-bold">@Model.Name</dd>
+
+                            <dt class="col-sm-3">Trạng thái:</dt>
+                            <dd class="col-sm-9">
+                                @if (Model.Status == 1)
+                                {
+                                    <span class="badge badge-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Không hoạt động</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-3">Ngày tạo:</dt>
+                            <dd class="col-sm-9">@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+
+                            <dt class="col-sm-3">Hình ảnh:</dt>
+                            <dd class="col-sm-9">
+                                @if (!string.IsNullOrEmpty(Model.Image))
+                                {
+                                    <div class="mb-2">
+                                        <img src="@Model.Image" alt="@Model.Name" class="img-thumbnail" style="max-height: 120px; object-fit: cover;" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\'text-muted text-sm\'>Lỗi tải ảnh</span>';" />
+                                    </div>
+                                    <small class="text-muted">@Model.Image</small>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có hình ảnh</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-3">Mô tả:</dt>
+                            <dd class="col-sm-9">@(string.IsNullOrEmpty(Model.Description) ? "Không có mô tả" : Model.Description)</dd>
+                        </dl>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash mr-1"></i> Xác nhận xóa
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary ml-2">
+                                <i class="fas fa-arrow-left mr-1"></i> Quay lại
+                            </a>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

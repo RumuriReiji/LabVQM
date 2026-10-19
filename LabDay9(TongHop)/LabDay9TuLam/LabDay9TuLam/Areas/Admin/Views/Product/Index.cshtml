@@ -1,0 +1,96 @@
+@model IEnumerable<LabDay9TuLam.Models.Product>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Quản lý sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách sản phẩm</h3>
+                <div class="card-tools">
+                    <a asp-action="Create" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Thêm mới
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th>Tên</th>
+                            <th>Giá</th>
+                            <th>Giá KM</th>
+                            <th>Danh mục</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th style="width: 150px;" class="text-center">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@(item.Price.ToString("N0") + " đ")</td>
+                                    <td>@(item.SalePrice.ToString("N0") + " đ")</td>
+                                    <td>@item.Category?.Name</td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="badge badge-success">Hiện</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Ẩn</span>
+                                        }
+                                    </td>
+                                    <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i> Sửa
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Xóa
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" class="text-center text-muted">Chưa có sản phẩm nào</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

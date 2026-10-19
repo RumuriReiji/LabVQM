@@ -1,0 +1,120 @@
+@model IEnumerable<LabDay9TuLam.Models.Blog>
+
+@{
+    ViewData["Title"] = "Danh sách bài viết";
+    int index = 1;
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Quản lý bài viết</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh sách bài viết</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Danh sách bài viết</h3>
+                        <div class="card-tools">
+                            <a asp-action="Create" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus mr-1"></i> Thêm mới
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;" class="text-center">#</th>
+                                    <th>Tên</th>
+                                    <th style="width: 140px;" class="text-center">Trạng thái</th>
+                                    <th style="width: 130px;" class="text-center">Ngày tạo</th>
+                                    <th style="width: 120px;" class="text-center">Hình ảnh</th>
+                                    <th>Mô tả</th>
+                                    <th style="width: 160px;" class="text-center">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">@(index++)</td>
+                                            <td class="font-weight-bold">@item.Name</td>
+                                            <td class="text-center">
+                                                @if (item.Status == 1)
+                                                {
+                                                    <span class="badge badge-success">Hoạt động</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">Không hoạt động</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                            <td class="text-center">
+                                                @if (!string.IsNullOrEmpty(item.Image))
+                                                {
+                                                    <img src="@item.Image" alt="@item.Name" class="img-thumbnail" style="max-height: 50px; max-width: 80px; object-fit: cover;" onerror="this.onerror=null;this.parentElement.innerHTML='<span class=\'text-muted text-sm\'>Lỗi ảnh</span>';" />
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted text-sm">Không có ảnh</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.Description))
+                                                {
+                                                    @(item.Description.Length > 80 ? item.Description.Substring(0, 80) + "..." : item.Description)
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted text-sm">Không có mô tả</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm mr-1">
+                                                    <i class="fas fa-edit mr-1"></i> Sửa
+                                                </a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash mr-1"></i> Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted py-4">Chưa có bài viết nào</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

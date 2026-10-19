@@ -1,0 +1,131 @@
+@model IEnumerable<LabDay9TuLam.Models.Category>
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Danh sách danh mục</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh mục</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle mr-1"></i> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-triangle mr-1"></i> @TempData["Error"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách danh mục</h3>
+                <div class="card-tools">
+                    <a asp-action="Create" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus mr-1"></i> Thêm mới
+                    </a>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-bordered table-striped text-nowrap">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;" class="text-center">#</th>
+                            <th>Tên</th>
+                            <th style="width: 140px;" class="text-center">Trạng thái</th>
+                            <th style="width: 130px;">Ngày tạo</th>
+                            <th style="width: 100px;" class="text-center">Hình ảnh</th>
+                            <th>Mô tả</th>
+                            <th style="width: 160px;" class="text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            int index = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center align-middle">@index</td>
+                                    <td class="align-middle font-weight-bold">@item.Name</td>
+                                    <td class="text-center align-middle">
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="badge badge-success">Hoạt động</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Không hoạt động</span>
+                                        }
+                                    </td>
+                                    <td class="align-middle">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center align-middle">
+                                        @if (!string.IsNullOrEmpty(item.Image))
+                                        {
+                                            <img src="@item.Image" alt="@item.Name" class="img-thumbnail" style="max-height: 45px; max-width: 60px; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted small">Không có</span>
+                                        }
+                                    </td>
+                                    <td class="align-middle text-wrap" style="max-width: 250px;">
+                                        @(string.IsNullOrEmpty(item.Description)
+                                            ? "-"
+                                            : (item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description))
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-sm" title="Sửa">
+                                            <i class="fas fa-edit mr-1"></i> Sửa
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" title="Xóa">
+                                            <i class="fas fa-trash mr-1"></i> Xóa
+                                        </a>
+                                    </td>
+                                </tr>
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted py-4">Chưa có danh mục nào. Hãy bấm "Thêm mới" để tạo danh mục đầu tiên!</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</section>
+<!-- /.content -->
