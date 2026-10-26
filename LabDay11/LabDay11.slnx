@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DBFirstApp/DBFirstApp.csproj" />
+  <Project Path="LabDay11/LabDay11.csproj" />
+</Solution>
