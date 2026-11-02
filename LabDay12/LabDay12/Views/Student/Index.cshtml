@@ -1,0 +1,70 @@
+@model IEnumerable<Student>
+@{
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+    ViewData["Title"] = "Students";
+}
+
+<h1 class="mt-4">Students</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Student List</li>
+</ol>
+
+<a asp-controller="Student" asp-action="Create" class="btn btn-primary mb-3">Create Student</a>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Student List
+    </div>
+    <div class="card-body">
+        <table id="tb" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Ảnh</th>
+                    <th>Họ tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Ngành</th>
+                    <th>Giới tính</th>
+                    <th>Hệ ĐT</th>
+                    <th>Địa chỉ</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.Id</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(s.AvatarUrl))
+                            {
+                                <img src="@s.AvatarUrl" alt="Avatar" style="width:50px; height:50px; object-fit:cover; border-radius:50%;" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">N/A</span>
+                            }
+                        </td>
+                        <td>@s.Name</td>
+                        <td>@s.DateOfBorth</td>
+                        <td>@s.Branch</td>
+                        <td>@(s.Gender == Gender.Male ? "Nam" : "Nữ")</td>
+                        <td>@(s.IsRegular ? "Chính quy" : "Phi chính quy")</td>
+                        <td>@s.Address</td>
+                        <td>@s.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var table = document.querySelector("table");
+        table.onclick = function onTableClick() {
+            table.style = "background-color: yellow;"
+        }
+    </script>
+}

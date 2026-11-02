@@ -1,0 +1,113 @@
+@model IEnumerable<Learner>
+@{
+    ViewData["Title"] = "Learners";
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+
+<div class="ms-2 mx-2">
+    <h1>Learner List</h1>
+
+    <!-- Lab5: Major filter tabs (ViewComponent) -->
+    @await Component.InvokeAsync("Major")
+
+    <!-- Lab6: Search form -->
+    <div class="row mb-3 mt-3">
+        <div class="col-md-4">
+            <div class="input-group">
+                <input type="text" id="keyword" class="form-control" placeholder="Tìm kiếm theo tên..." />
+                <button id="btnSearch" class="btn btn-outline-primary" type="button">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content area (replaced by AJAX) -->
+    <div id="content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>Họ</th>
+                    <th>Ngành</th>
+                    <th>Ngày Nhập Học</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.LearnerId</td>
+                        <td>@item.FirstMidName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Major?.MajorName</td>
+                        <td>@item.EnrollmentDate</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.LearnerId">Edit</a>|<a asp-action="Delete" asp-route-id="@item.LearnerId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Lab6: Pagination -->
+        <nav>
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.pageNum; i++)
+                {
+                    <li class="page-item" page="@i">
+                        <a class="page-link">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+
+    <a asp-action="Create" class="btn btn-primary">Create New Student</a>
+</div>
+
+@section Scripts {
+    <script>
+        var filterUrl = '@Url.Action("LearnerFilter", "Learner")';
+
+        // Lab6: Pagination click (delegated for dynamically loaded content)
+        $('body').on('click', 'li.page-item', function (e) {
+            var page = $(this).attr("page");
+            var mid = $(this).attr("mid");
+            var keyword = $(this).attr("keyword");
+            $.ajax({
+                url: filterUrl,
+                data: { mid: mid, keyword: keyword, pageIndex: page },
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+
+        // Lab5: Major filter click (AJAX) - chỉ target Major tabs, không target sidebar
+        $("body").on("click", "#majorTabs li", function (e) {
+            var id = $(this).attr("id");
+            $.ajax({
+                url: filterUrl,
+                data: { mid: id },
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+
+        // Lab6: Search button click
+        $("button#btnSearch").click(function (e) {
+            var keyword = $("input#keyword").val();
+            $.ajax({
+                url: filterUrl,
+                data: { keyword: keyword },
+                success: function (response) {
+                    $("div#content").html(response);
+                }
+            });
+        });
+    </script>
+}

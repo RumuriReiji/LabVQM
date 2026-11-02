@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewData["Title"] - Admin</title>
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+    <!-- Top Navigation -->
+    @await Html.PartialAsync("_TopNav")
+
+    <div id="layoutSidenav">
+        <!-- Left Menu (ViewComponent) -->
+        @await Component.InvokeAsync("Render")
+
+        <!-- Right Content -->
+        <div id="layoutSidenav_content">
+            <!-- Main Content -->
+            <main>
+                <div class="container-fluid px-4">
+                    @RenderBody()
+                </div>
+            </main>
+            <!-- Footer -->
+            @await Html.PartialAsync("_Footer")
+        </div>
+    </div>
+
+    <script src="~/js/scripts.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
