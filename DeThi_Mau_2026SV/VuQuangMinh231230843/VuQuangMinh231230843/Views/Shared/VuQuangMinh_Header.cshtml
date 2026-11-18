@@ -1,0 +1,55 @@
+﻿@inject VuQuangMinh231230843.Models.QlnhaSachContext _context
+@{
+    var dsloai = _context.TheLoais.ToList();
+}
+<header class="header">
+    <div class="topbar">
+        <div class="container">
+            <span>Hotline: <b>1900 6789</b> &nbsp;|&nbsp; Miễn phí vận chuyển đơn từ 300.000đ</span>
+            <span>Đăng nhập &nbsp;|&nbsp; Đăng ký</span>
+        </div>
+    </div>
+    <div class="header-main">
+        <div class="container">
+            <a href="index.html"><img src="~/images/logo.png" alt="BookHub" /></a>
+            <div class="cart-box">Giỏ hàng: 0 sản phẩm - 0đ</div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="menu">
+                <li class="active"><a href="javascript:void(0)" onclick="locTheoLoai(0)">Vũ Quang Minh</a></li>
+                @foreach(var item in dsloai)
+                {
+                    <li><a href="javascript:void(0)"onclick="locTheoLoai(@item.MaTl)">@item.TenTl</a></li>
+
+                }
+                
+            </ul>
+            <form class="search-box">
+                <input type="text" placeholder="Tìm sách..." />
+                <button type="button">Tìm</button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/main.js"></script>
+
+<script>
+    function locTheoLoai(MaTl) {
+        $.ajax({
+            url: '/Home/LocTheoLoai',  
+            type: 'GET',
+            data: { MaTl: MaTl },     
+            success: function (data) {
+                
+                $('.main').replaceWith(data);
+            },
+            error: function () {
+                alert('Lỗi lọc dữ liệu!');
+            }
+        });
+    }
+</script>
