@@ -1,0 +1,48 @@
+﻿@model VuQuangMinh_231230843.Models.TaiSan
+
+@{
+    ViewData["Title"] = "Sửa tài sản";
+}
+
+<h1>Sửa thông tin tài sản</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaTs" />
+
+            <div class="form-group">
+                <label asp-for="MaLoai" class="control-label">Loại tài sản</label>
+                <select asp-for="MaLoai" class="form-control" asp-items="ViewBag.MaLoai"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TenTs" class="control-label"></label>
+                <input asp-for="TenTs" class="form-control" />
+                <span asp-validation-for="TenTs" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NguyenGia" class="control-label"></label>
+                <input asp-for="NguyenGia" class="form-control" />
+                <span asp-validation-for="NguyenGia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Anh" class="control-label"></label>
+                <input asp-for="Anh" class="form-control" />
+                <span asp-validation-for="Anh" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Quay về trang chủ</a>
+</div>
+
